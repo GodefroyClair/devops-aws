@@ -1,0 +1,36 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  build-and-test:
+    executor: python/default
+    steps:
+      - checkout
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
+      - lint:
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            make lint
+      - run:
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            make test
+          name: install deps
+      - run:
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            make install
+          name: install deps
+          name: install deps
+
+workflows:
+  main:
+    jobs:
+      - build-and-test
