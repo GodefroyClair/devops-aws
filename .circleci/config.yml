@@ -11,6 +11,12 @@ jobs:
       - python/load-cache
       - python/install-deps
       - python/save-cache
+      - run:
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            make test
+          name: install deps
       - lint:
           command: |
             python3 -m venv venv
@@ -20,15 +26,8 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            make test
-          name: install deps
-      - run:
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
             make install
-          name: install deps
-          name: install deps
+          name: test src
 
 workflows:
   main:
