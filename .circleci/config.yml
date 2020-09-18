@@ -17,11 +17,12 @@ jobs:
             . venv/bin/activate
             make test
           name: install deps
-      - lint:
+      - run:
           command: |
             python3 -m venv venv
             . venv/bin/activate
             make lint
+          name: lint
       - run:
           command: |
             python3 -m venv venv
